@@ -7,9 +7,9 @@ Gem::Specification.new do |s|
   s.version     = HangingGardens::VERSION
   s.authors     = ["Simon Menke"]
   s.email       = ["simon.menke@gmail.com"]
-  s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.homepage    = "https://github.com/hanging-gardens"
+  s.summary     = %q{Hanging Gardens - CommonJS for Sprockets}
+  s.description = %q{Hanging Gardens - CommonJS for Sprockets}
 
   s.rubyforge_project = "hanging_gardens"
 
