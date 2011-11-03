@@ -1,5 +1,5 @@
 class HangingGardens::ModuleWrapper < Tilt::Template
-  RE_REQUIRE = /(?:\s+|(?:[=]\s*)|(?:^\s*))require\s*\((.+)\)/
+  RE_REQUIRE = /(?:\s+|(?:[=]\s*)|(?:^\s*))require\s*\(([^)]+)\)/
   
   SANDBOX = %w(
     module
@@ -28,11 +28,16 @@ class HangingGardens::ModuleWrapper < Tilt::Template
   def evaluate(context, locals, &block)
     context.require_asset 'hanging_gardens/runtime.js'
     unless context.logical_path == 'browser/console' or context.logical_path == 'browser/window'
-      context.require_asset 'browser/console' 
+      context.require_asset 'browser/console'
     end
     
     data.scan(RE_REQUIRE) do |m|
-      path = YAML.load(m.first)
+      path = nil
+      begin
+        path = YAML.load(m.first)
+      rescue => e
+        raise "Failed to interpret require(#{m.first}) in #{context.logical_path}"
+      end
       if path[0,2] == './' or path[0,3] == '../'
         path = File.join(File.dirname(context.logical_path), path)
       end
