@@ -1,0 +1,3 @@
+var Helpers = require('./helpers');
+Helpers.helper();
+Helpers.fader();

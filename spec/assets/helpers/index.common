@@ -1,0 +1,5 @@
+function helper() { console.log('cool'); }
+var Fader = require('./faders');
+
+exports.helper = helper;
+exports.fader  = Fader.fader;
